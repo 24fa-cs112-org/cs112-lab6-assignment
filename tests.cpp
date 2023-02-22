@@ -67,6 +67,38 @@ TEST_CASE("prepend") {
     REQUIRE(aList.myLast->myNext == nullptr);
 }
 
+TEST_CASE("append") {
+    List aList;
+    aList.append(11);
+    REQUIRE(aList.getSize() == 1);
+    REQUIRE(aList.myFirst != nullptr);
+    REQUIRE(aList.myLast == aList.myFirst);
+    REQUIRE(aList.getFirst() == 11);
+    REQUIRE(aList.getLast() == 11);
+    REQUIRE(aList.myFirst->myNext == nullptr);
+
+    // append to a list containing 1 Item
+    aList.append(22);
+    REQUIRE(aList.getSize() == 2);
+    REQUIRE(aList.myFirst != nullptr);
+    REQUIRE(aList.myLast != nullptr);
+    REQUIRE(aList.myFirst != aList.myLast);
+    REQUIRE(aList.getFirst() == 11);
+    REQUIRE(aList.getLast() == 22);
+    REQUIRE(aList.myFirst->myNext != nullptr);
+    REQUIRE(aList.myLast->myNext == nullptr);
+    REQUIRE(aList.myFirst->myNext == aList.myLast);
+
+    aList.append(33);
+    REQUIRE(aList.getSize() == 3);
+    REQUIRE(aList.myFirst != nullptr);
+    REQUIRE(aList.myLast != nullptr);
+    REQUIRE(aList.getFirst() == 11);
+    REQUIRE(aList.getLast() == 33);
+    REQUIRE(aList.myFirst->myNext->myItem == 22);
+    REQUIRE(aList.myLast->myNext == nullptr);
+}
+
 TEST_CASE("destructor") {
     List l;
     l.prepend(33);
