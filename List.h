@@ -14,7 +14,7 @@ using namespace std;
 typedef double Item;
 
 class List {
-   public:
+public:
     List();
     virtual ~List();
     unsigned getSize() const { return mySize; }
@@ -22,10 +22,9 @@ class List {
     Item getLast() const;
     void prepend(const Item &it);
     void writeTo(ostream &out) const;
+    string toString() const;
 
-    /* I am making all the internal details available publicly,
-       for testing. Everything below here should be private. */
-   public:
+private:
     struct Node {
         Node();
         Node(Item it, Node *next);

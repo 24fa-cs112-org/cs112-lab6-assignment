@@ -67,3 +67,11 @@ void List::writeTo(ostream &out) const {
         out << curr->myItem << " ";
     }
 }
+
+string List::toString() const {
+    string res = "";
+    for (Node *curr = myFirst; curr != nullptr; curr = curr->myNext) {
+        res += to_string(curr->myItem) + " ";
+    }
+    return res;
+}
