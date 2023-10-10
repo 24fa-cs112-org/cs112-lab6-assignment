@@ -11,7 +11,7 @@
 #include <iostream>
 using namespace std;
 
-typedef double Item;
+typedef int Item;
 
 class List {
 public:
