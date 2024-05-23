@@ -15,38 +15,50 @@ jobs:
       uses: actions/checkout@v4
     - name: append
       id: append
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: classroom-resources/autograding-io-grader@v1
       with:
         test-name: append
         setup-command: make
         command: "./tester append"
+        input: ''
+        expected-output: All tests passed
+        comparison-method: contains
         timeout: 10
         max-score: 4
     - name: search
       id: search
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: classroom-resources/autograding-io-grader@v1
       with:
         test-name: search
         setup-command: make
-        command: "./tester search"
+        command: "./tester lookfor"
+        input: ''
+        expected-output: All tests passed
+        comparison-method: contains
         timeout: 10
         max-score: 3
     - name: copy
       id: copy
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: classroom-resources/autograding-io-grader@v1
       with:
         test-name: copy
         setup-command: make
         command: "./tester copy"
+        input: ''
+        expected-output: All tests passed
+        comparison-method: contains
         timeout: 10
         max-score: 3
     - name: equality
       id: equality
-      uses: classroom-resources/autograding-command-grader@v1
+      uses: classroom-resources/autograding-io-grader@v1
       with:
         test-name: equality
         setup-command: make
         command: "./tester equality"
+        input: ''
+        expected-output: All tests passed
+        comparison-method: contains
         timeout: 10
         max-score: 3
     - name: Autograding Reporter
