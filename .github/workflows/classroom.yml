@@ -1,0 +1,60 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: append
+      id: append
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: append
+        setup-command: make
+        command: "./tester append"
+        timeout: 10
+        max-score: 4
+    - name: search
+      id: search
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: search
+        setup-command: make
+        command: "./tester search"
+        timeout: 10
+        max-score: 3
+    - name: copy
+      id: copy
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: copy
+        setup-command: make
+        command: "./tester copy"
+        timeout: 10
+        max-score: 3
+    - name: equality
+      id: equality
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: equality
+        setup-command: make
+        command: "./tester equality"
+        timeout: 10
+        max-score: 3
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        APPEND_RESULTS: "${{steps.append.outputs.result}}"
+        SEARCH_RESULTS: "${{steps.search.outputs.result}}"
+        COPY_RESULTS: "${{steps.copy.outputs.result}}"
+        EQUALITY_RESULTS: "${{steps.equality.outputs.result}}"
+      with:
+        runners: append,search,copy,equality
